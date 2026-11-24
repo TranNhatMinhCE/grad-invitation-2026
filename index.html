@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiệp Mời Lễ Tốt Nghiệp · Trần Nhật Minh | HCMUT 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+          },
+          colors: {
+            bk: {
+              deep: '#030391',
+              royal: '#00338D',
+              sky: '#1488DB',
+              light: '#EBF5FF',
+              gold: '#C89D3C',
+              goldLight: '#F6E8C3'
+            }
+          },
+          boxShadow: {
+            'editorial': '0 20px 50px -15px rgba(3, 3, 145, 0.14), 0 4px 16px -4px rgba(20, 136, 219, 0.08)',
+            'photo': '0 22px 45px -12px rgba(0, 51, 141, 0.20)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    body {
+      background-color: #EEF6FF;
+      color: #1E293B;
+    }
+
+    /* Ảnh nền bao quát toàn cảnh */
+    .grad-bg-stage {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .grad-bg-stage__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0.58;
+      filter: saturate(1.12) contrast(1.02);
+      animation: bgPanoramaMotion 24s ease-in-out infinite alternate;
+    }
+
+    .grad-bg-stage__veil {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(255, 255, 255, 0.36) 0%,
+          rgba(235, 245, 255, 0.24) 45%,
+          rgba(255, 255, 255, 0.44) 100%);
+    }
+
+    @keyframes bgPanoramaMotion {
+      0% {
+        transform: scale(1.02) translate3d(0px, 0px, 0px);
+      }
+      50% {
+        transform: scale(1.06) translate3d(-1.2%, -0.8%, 0px);
+      }
+      100% {
+        transform: scale(1.04) translate3d(1.2%, -0.5%, 0px);
+      }
+    }
+
+    .bokeh-orb {
+      position: fixed;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(2px);
+      animation: floatBokeh 14s ease-in-out infinite;
+    }
+
+    @keyframes floatBokeh {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.45;
+      }
+      50% {
+        transform: translateY(-28px) translateX(14px) scale(1.12);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-7px);
+      }
+    }
+
+    .photo-float {
+      animation: gentleFloat 6.5s ease-in-out infinite;
+    }
+
+    .photo-zoom-img {
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+    }
+
+    .group:hover .photo-zoom-img {
+      transform: scale(1.06);
+      filter: brightness(1.04);
+    }
+
+    .gold-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(200, 157, 60, 0.65) 50%, transparent 100%);
+    }
+
+    .fade-up-item {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-up-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .editorial-frame {
+      background: rgba(255, 255, 255, 0.94);
+      padding: 12px 12px 16px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(20, 136, 219, 0.22);
+      box-shadow: 0 22px 45px -12px rgba(0, 51, 141, 0.18);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+    }
+    .editorial-frame:hover {
+      transform: translateY(-7px) rotate(0deg) !important;
+      box-shadow: 0 28px 55px -12px rgba(3, 3, 145, 0.25);
+    }
+
+    /* Tối ưu hiệu năng cho màn hình điện thoại */
+    @media (max-width: 767px) {
+      .grad-bg-stage__img {
+        animation: none;
+        transform: none;
+        opacity: 0.42;
+      }
+      .bokeh-orb {
+        display: none;
+      }
+      .photo-float {
+        animation: none;
+      }
+      .fade-up-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* Con trỏ chuột động chỉ trên thiết bị có chuột */
+    .cursor-ring,
+    .cursor-dot {
+      display: none;
+      pointer-events: none;
+      position: fixed;
+      z-index: 60;
+    }
+
+    @media (pointer: fine) {
+      .cursor-ring {
+        display: block;
+        width: 34px;
+        height: 34px;
+        border-radius: 9999px;
+        border: 1.5px solid rgba(20, 136, 219, 0.75);
+        background: radial-gradient(circle, rgba(200, 157, 60, 0.12) 0%, transparent 70%);
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+      }
+
+      .cursor-ring.is-hover {
+        width: 48px;
+        height: 48px;
+        border-color: rgba(200, 157, 60, 0.95);
+        background: radial-gradient(circle, rgba(200, 157, 60, 0.22) 0%, transparent 72%);
+      }
+
+      .cursor-ring.is-click {
+        transform: translate(-50%, -50%) scale(0.82);
+      }
+
+      .cursor-dot {
+        display: block;
+        width: 7px;
+        height: 7px;
+        border-radius: 9999px;
+        background: #030391;
+        box-shadow: 0 0 10px rgba(20, 136, 219, 0.75);
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-bk-sky selection:text-white relative">
+
+  <!-- Background toàn cảnh sân trường & tung mũ tốt nghiệp -->
+  <div class="grad-bg-stage" aria-hidden="true">
+    <img
+      src="BG.jpg"
+      alt="Toàn cảnh sân trường tốt nghiệp ĐH Bách Khoa"
+      class="grad-bg-stage__img"
+      onerror="this.style.display='none';"
+    />
+    <div class="grad-bg-stage__veil"></div>
+  </div>
+
+  <!-- Các đốm sáng Bokeh nhẹ nhàng -->
+  <div class="bokeh-orb w-24 h-24 bg-sky-200/40 top-24 left-[8%]" style="animation-delay: 0s;"></div>
+  <div class="bokeh-orb w-16 h-16 bg-amber-200/45 top-56 right-[10%]" style="animation-delay: 3s;"></div>
+  <div class="bokeh-orb w-20 h-20 bg-blue-200/35 bottom-40 left-[12%]" style="animation-delay: 6s;"></div>
+  <div class="bokeh-orb w-14 h-14 bg-amber-200/40 bottom-24 right-[15%]" style="animation-delay: 9s;"></div>
+
+  <!-- Con trỏ chuột động -->
+  <div id="cursorRing" class="cursor-ring" aria-hidden="true"></div>
+  <div id="cursorDot" class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-sky-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-2 sm:gap-3">
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group min-w-0">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-white border border-sky-100 shadow-sm flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+          <img
+            src="logoBK.png"
+            alt="Logo Trường Đại học Bách Khoa TP.HCM"
+            class="w-full h-full object-contain p-0.5"
+            onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'font-black text-xs text-bk-deep\'>BK</span>';"
+          />
+        </div>
+
+        <div class="leading-tight min-w-0">
+          <span class="block text-[9px] sm:text-[11px] font-semibold tracking-[0.12em] text-bk-sky uppercase truncate">
+            ĐẠI HỌC QUỐC GIA TP.HCM
+          </span>
+          <span class="block text-[11px] sm:text-sm font-bold text-bk-deep tracking-wide truncate">
+            TRƯỜNG ĐẠI HỌC BÁCH KHOA
+          </span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <button
+          id="musicToggleBtn"
+          type="button"
+          onclick="toggleMusic()"
+          aria-pressed="false"
+          class="px-3 sm:px-3.5 py-2 rounded-full bg-bk-light hover:bg-sky-100 text-bk-deep border border-sky-200 text-xs sm:text-sm font-semibold transition active:scale-95 flex items-center gap-1.5"
+        >
+          <span id="musicIcon">🎵</span>
+          <span id="musicLabel">Bật nhạc</span>
+        </button>
+
+        <button
+          type="button"
+          onclick="launchGraduationConfetti()"
+          class="px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-bk-deep via-bk-royal to-bk-sky hover:brightness-110 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-900/15 transition active:scale-95 flex items-center gap-1.5"
+        >
+          <span>🎉</span>
+          <span class="hidden sm:inline">Tung hoa</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-20 space-y-16 sm:space-y-24">
+
+    <!-- PHẦN 1: MỞ ĐẦU -->
+    <section class="bg-white/90 sm:bg-white/82 sm:backdrop-blur-md rounded-[2rem] border border-white/80 shadow-editorial p-6 sm:p-10 lg:p-12 relative overflow-hidden fade-up-item visible">
+      <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-bk-deep via-bk-sky to-bk-gold"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-5 flex justify-center min-w-0">
+          <div class="relative w-full max-w-[330px] photo-float">
+            <div class="absolute -inset-2.5 rounded-[1.75rem] border border-bk-gold/45 rotate-2 pointer-events-none"></div>
+            <div class="absolute -inset-2.5 rounded-[1.75rem] border border-bk-sky/30 -rotate-2 pointer-events-none"></div>
+
+            <div class="relative bg-white/95 p-3 rounded-3xl shadow-photo border border-slate-100 group cursor-pointer"
+              onclick="openLightbox('2212085_TranNhatMinh.jpg', 'Tân Cử nhân Trần Nhật Minh — Khoa Kỹ thuật Máy tính, ĐH Bách Khoa TP.HCM')">
+              <div class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-bk-light">
+                <img
+                  src="2212085_TranNhatMinh.jpg"
+                  alt="Tân Cử nhân Trần Nhật Minh - ĐH Bách Khoa TP.HCM"
+                  class="w-full h-full object-cover object-top photo-zoom-img"
+                  onerror="this.onerror=null; this.src='https://placehold.co/600x750/EBF5FF/030391?text=Tran+Nhat+Minh%0AHCMUT+2026';"
+                />
+              </div>
+
+              <div class="pt-3.5 pb-1 text-center">
+                <span class="inline-block px-3 py-0.5 rounded-full bg-bk-light text-bk-deep text-[11px] font-semibold tracking-wider uppercase">
+                  Kỹ thuật Máy tính · Khóa 2022 – 2026
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 text-center lg:text-left space-y-5 min-w-0">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-bk-light border border-sky-200/80 text-bk-royal text-xs font-semibold tracking-widest uppercase">
+            <span>🎓</span>
+            <span>Thiệp Mời Lễ Tốt Nghiệp · 2026</span>
+          </div>
+
+          <div class="space-y-1">
+            <p class="font-serif italic text-xl sm:text-2xl text-bk-gold font-semibold">
+              Trân trọng kính mời bạn đến chung vui cùng
+            </p>
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-bk-deep tracking-tight leading-[1.12]">
+              Trần Nhật Minh
+            </h1>
+            <p class="text-sm sm:text-base font-medium text-bk-sky pt-1">
+              Tân Cử nhân Kỹ thuật Máy tính — Trường Đại học Bách Khoa (ĐHQG-HCM)
+            </p>
+          </div>
+
+          <div class="gold-divider my-2"></div>
+
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+            Bốn năm thanh xuân rực rỡ dưới mái trường Bách Khoa sắp khép lại bằng một dấu mốc thật đặc biệt. Từ những ngày đầu bỡ ngỡ bước qua cổng Lý Thường Kiệt cho đến khoảnh khắc khoác lên mình chiếc áo lễ phục xanh tự hào, sự đồng hành và tình cảm của bạn luôn là điều Minh trân quý nhất.
+          </p>
+          <p class="text-slate-800 font-medium text-sm sm:text-base leading-relaxed">
+            Minh rất mong được đón tiếp <span class="text-bk-deep font-bold">bạn và gia đình</span> đến tham dự buổi lễ, cùng chụp với Minh những bức ảnh kỷ niệm thật tươi tắn trong ngày vui trọng đại này!
+          </p>
+
+          <div class="pt-2">
+            <div class="rounded-2xl bg-gradient-to-br from-bk-light/90 via-white/95 to-sky-50/90 border border-sky-200/80 p-4 sm:p-5">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-sky-200/60">
+                <div class="text-center sm:text-left">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-bk-sky">Thời gian đón khách</span>
+                  <p class="text-lg sm:text-xl font-bold text-bk-deep">09:00 – 14:00 <br /> Thứ Bảy, 28/11/2026</p>
+                </div>
+                <span class="inline-flex items-center justify-center px-3 py-1 rounded-full bg-white text-bk-gold border border-bk-gold/40 text-xs font-semibold shadow-sm self-center sm:self-auto">
+                  Hội trường A5 · ĐHBK
+                </span>
+              </div>
+
+              <div id="countdownGrid" class="grid grid-cols-4 gap-2 sm:gap-3 pt-3.5 text-center">
+                <div class="bg-white rounded-xl py-2 px-1 border border-sky-100 shadow-sm">
+                  <span id="cd-days" class="block font-serif text-2xl sm:text-3xl font-bold text-bk-deep">--</span>
+                  <span class="text-[11px] text-slate-500 font-medium">Ngày</span>
+                </div>
+                <div class="bg-white rounded-xl py-2 px-1 border border-sky-100 shadow-sm">
+                  <span id="cd-hours" class="block font-serif text-2xl sm:text-3xl font-bold text-bk-deep">--</span>
+                  <span class="text-[11px] text-slate-500 font-medium">Giờ</span>
+                </div>
+                <div class="bg-white rounded-xl py-2 px-1 border border-sky-100 shadow-sm">
+                  <span id="cd-mins" class="block font-serif text-2xl sm:text-3xl font-bold text-bk-sky">--</span>
+                  <span class="text-[11px] text-slate-500 font-medium">Phút</span>
+                </div>
+                <div class="bg-white rounded-xl py-2 px-1 border border-sky-100 shadow-sm">
+                  <span id="cd-secs" class="block font-serif text-2xl sm:text-3xl font-bold text-bk-gold">--</span>
+                  <span class="text-[11px] text-slate-500 font-medium">Giây</span>
+                </div>
+              </div>
+              <p id="countdownDone" class="hidden pt-3 text-center text-sm font-semibold text-bk-deep">
+                ✨ Buổi lễ tốt nghiệp đang diễn ra tại Hội trường A5!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 2: HÀNH TRÌNH THANH XUÂN -->
+    <section class="space-y-12 sm:space-y-16">
+      <div class="text-center max-w-2xl mx-auto space-y-2.5 fade-up-item bg-white/90 sm:bg-white/80 sm:backdrop-blur-md rounded-3xl px-6 py-5 border border-white/80 shadow-sm">
+        <span class="text-xs font-bold tracking-[0.2em] text-bk-sky uppercase">Nhật Ký Thanh Xuân</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-bk-deep">
+          Hành Trình Bốn Năm Rực Rỡ
+        </h2>
+        <div class="w-24 mx-auto gold-divider"></div>
+        <p class="text-slate-700 text-sm sm:text-base pt-1">
+          Mỗi khung hình là một mảnh ghép dịu dàng của tuổi trẻ, lưu giữ trọn vẹn niềm tự hào màu áo xanh Bách Khoa.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-7 md:gap-10 items-center fade-up-item">
+        <div class="md:col-span-7 min-w-0">
+          <div onclick="openLightbox('pregad1.jpg', 'Cột mốc Lễ Tốt Nghiệp 2026 — Khoảnh khắc tự hào trên bục danh dự ĐH Bách Khoa TP.HCM')"
+            class="editorial-frame -rotate-1 cursor-pointer group">
+            <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-bk-light">
+              <img
+                src="pregad1.jpg"
+                alt="Lễ Tốt Nghiệp 2026 - Trần Nhật Minh"
+                class="w-full h-full object-cover photo-zoom-img"
+                onerror="this.onerror=null; this.src='https://placehold.co/800x500/EBF5FF/030391?text=Le+Tot+Nghiep+2026'"
+              />
+              <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-bk-deep text-[11px] font-semibold shadow-sm">
+                🔍 Phóng to
+              </span>
+            </div>
+            <div class="pt-3 px-2 flex items-center justify-between text-xs text-slate-500">
+              <span class="font-serif italic text-sm text-bk-royal">Chương I · Cột Mốc Trưởng Thành</span>
+              <span>HCMUT · 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 min-w-0 space-y-3.5 px-5 py-5 rounded-3xl bg-white/90 sm:bg-white/82 sm:backdrop-blur-md border border-white/80 shadow-sm">
+          <span class="inline-block font-serif italic text-lg text-bk-gold font-semibold">01. Khép lại những mùa đồ án</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-bk-deep leading-snug">
+            Tự Hào Khoác Lên Màu Áo Lễ Phục Xanh
+          </h3>
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+            “Đứng trên bục danh dự của Lễ Tốt Nghiệp 2026, cầm trên tay tấm bằng Cử nhân, mọi đêm thức trắng chạy deadline, những buổi bảo vệ đồ án căng thẳng bỗng hóa thành niềm hạnh phúc vỡ òa. Cảm ơn bản thân vì đã luôn kiên trì đến vạch đích.”
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-7 md:gap-10 items-center fade-up-item">
+        <div class="md:col-span-5 min-w-0 order-2 md:order-1 space-y-3.5 px-5 py-5 rounded-3xl bg-white/90 sm:bg-white/82 sm:backdrop-blur-md border border-white/80 shadow-sm md:text-right">
+          <span class="inline-block font-serif italic text-lg text-bk-gold font-semibold">02. Tình bạn Bách Khoa</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-bk-deep leading-snug">
+            Tung Cao Ước Mơ Dưới Bầu Trời Sân Trường
+          </h3>
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+            “Thanh xuân đại học sẽ chẳng thể trọn vẹn nếu thiếu đi những người anh em đồng hành. Khoảnh khắc cùng nhau tung cao chiếc mũ tốt nghiệp trước tòa nhà biểu tượng Bách Khoa chính là lời hẹn ước cho một chặng đường mới thật rực rỡ phía trước.”
+          </p>
+        </div>
+
+        <div class="md:col-span-7 min-w-0 order-1 md:order-2">
+          <div onclick="openLightbox('pregad2.jpg', 'Cùng những người anh em Bách Khoa tung cao chiếc mũ cử nhân dưới bầu trời sân trường')"
+            class="editorial-frame rotate-1 cursor-pointer group">
+            <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-bk-light">
+              <img
+                src="pregad2.jpg"
+                alt="Tung mũ tốt nghiệp trước tòa nhà ĐH Bách Khoa"
+                class="w-full h-full object-cover photo-zoom-img"
+                onerror="this.onerror=null; this.src='https://placehold.co/800x500/EBF5FF/1488DB?text=Tung+Mu+Tot+Nghiep'"
+              />
+              <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-bk-deep text-[11px] font-semibold shadow-sm">
+                🔍 Phóng to
+              </span>
+            </div>
+            <div class="pt-3 px-2 flex items-center justify-between text-xs text-slate-500">
+              <span class="font-serif italic text-sm text-bk-royal">Chương II · Đồng Đội & Sẻ Chia</span>
+              <span>268 Lý Thường Kiệt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-7 md:gap-10 items-center fade-up-item">
+        <div class="md:col-span-7 min-w-0">
+          <div onclick="openLightbox('pregad3.jpg', 'Khoảnh khắc lặng yên nơi góc cầu thang quen trước giờ khắc trưởng thành')"
+            class="editorial-frame -rotate-1 cursor-pointer group">
+            <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-bk-light">
+              <img
+                src="pregad3.jpg"
+                alt="Bậc thang giảng đường ĐH Bách Khoa TP.HCM"
+                class="w-full h-full object-cover photo-zoom-img"
+                onerror="this.onerror=null; this.src='https://placehold.co/800x500/EBF5FF/00338D?text=Hanh+Lang+Giang+Duong'"
+              />
+              <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-white/90 text-bk-deep text-[11px] font-semibold shadow-sm">
+                🔍 Phóng to
+              </span>
+            </div>
+            <div class="pt-3 px-2 flex items-center justify-between text-xs text-slate-500">
+              <span class="font-serif italic text-sm text-bk-royal">Chương III · Góc Nhỏ Ký Ức</span>
+              <span>Khuôn viên ĐHBK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 min-w-0 space-y-3.5 px-5 py-5 rounded-3xl bg-white/90 sm:bg-white/82 sm:backdrop-blur-md border border-white/80 shadow-sm">
+          <span class="inline-block font-serif italic text-lg text-bk-gold font-semibold">03. Lưu giữ từng bước chân</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-bk-deep leading-snug">
+            Bậc Thang Quen Thuộc Ngày Chia Xa
+          </h3>
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+            “Từng bậc thang ngập nắng, từng góc chiếu nghỉ rợp bóng cây xanh rì rào tiếng gió nơi sân trường sẽ mãi là một phần ký ức dịu êm. Dù mai này mỗi người một phương trời, Bách Khoa vẫn luôn là ngôi nhà chung ấm áp để nhớ về.”
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 3: THỜI GIAN & ĐỊA ĐIỂM / GỬI XE & DI CHUYỂN (THEO ẢNH MẪU) -->
+    <section class="fade-up-item">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-stretch">
+
+        <!-- Cột trái: Thời Gian & Địa Điểm -->
+        <div class="min-w-0 rounded-[2rem] bg-white/92 sm:bg-white/88 sm:backdrop-blur-md border border-[#E7D8A6] shadow-editorial p-6 sm:p-8 flex flex-col justify-between space-y-6">
+          <div class="space-y-5">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-bk-deep text-white flex items-center justify-center text-base shadow-sm shrink-0">
+                ✦
+              </span>
+              <h2 class="font-sans text-xl sm:text-2xl font-bold text-bk-deep tracking-tight">
+                Thời Gian &amp; Địa Điểm
+              </h2>
+            </div>
+
+            <!-- Ô Thời gian -->
+            <div class="rounded-2xl bg-[#F4F8FD]/90 border border-sky-200/80 p-4 sm:p-5 space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-[0.08em] text-bk-sky">
+                THỜI GIAN
+              </p>
+              <p class="text-lg sm:text-xl font-bold text-bk-deep leading-snug">
+                09:00 – 14:00, Thứ Bảy, ngày 28/11/2026
+              </p>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pt-0.5">
+                Rất mong được đón tiếp bạn đúng giờ để cùng chụp ảnh lưu niệm.
+              </p>
+            </div>
+
+            <!-- Ô Địa điểm -->
+            <div class="rounded-2xl bg-[#F4F8FD]/90 border border-sky-200/80 p-4 sm:p-5 space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-[0.08em] text-bk-sky">
+                ĐỊA ĐIỂM
+              </p>
+              <p class="text-lg sm:text-xl font-bold text-bk-deep leading-snug">
+                Hội trường A5 – Trường Đại học Bách Khoa (ĐHQG-HCM)
+              </p>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pt-0.5">
+                268 Lý Thường Kiệt, Phường 14, Quận 10, TP.HCM
+              </p>
+            </div>
+          </div>
+
+          <!-- 2 nút hành động -->
+          <div class="space-y-3 pt-1">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+B%C3%A1ch+Khoa+268+L%C3%BD+Th%C6%B0%E1%BB%9Dng+Ki%E1%BB%87t+Qu%E1%BA%ADn+10"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#020288] via-bk-deep to-bk-royal hover:brightness-110 text-white font-bold text-sm shadow-md shadow-blue-900/20 transition flex items-center justify-center gap-2"
+            >
+              <span>📍</span>
+              <span>Mở bản đồ tới ĐH Bách Khoa</span>
+            </a>
+
+            <button
+              type="button"
+              onclick="downloadCalendarEvent()"
+              class="w-full py-3.5 px-5 rounded-xl bg-white hover:bg-sky-50 text-bk-deep border border-sky-200 font-bold text-sm shadow-sm transition flex items-center justify-center gap-2"
+            >
+              <span>📅</span>
+              <span>Lưu lịch nhắc vào điện thoại (.ics)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Cột phải: Gửi Xe & Di Chuyển -->
+        <div class="min-w-0 rounded-[2rem] bg-white/92 sm:bg-white/88 sm:backdrop-blur-md border border-[#E7D8A6] shadow-editorial p-6 sm:p-8 flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-xl bg-bk-sky text-white flex items-center justify-center text-sm font-extrabold shadow-sm shrink-0">
+                P
+              </span>
+              <h2 class="font-sans text-xl sm:text-2xl font-bold text-bk-deep tracking-tight">
+                Gửi Xe &amp; Di Chuyển
+              </h2>
+            </div>
+
+            <!-- Lưu ý vàng kem -->
+            <div class="rounded-2xl bg-[#FFFDF2] border border-[#E8D59B] px-4 py-3.5 text-xs sm:text-sm text-[#7A5612] leading-relaxed">
+              <span>💡</span>
+              <strong class="font-bold text-[#6B4A0E]">Lưu ý nhỏ:</strong> Ngày lễ tốt nghiệp khuôn viên trường khá đông, nếu tiện bạn có thể đặt <strong class="font-bold text-[#6B4A0E]">Grab / Be</strong> đến thẳng cổng trường cho thoải mái nhé.
+            </div>
+
+            <!-- Danh sách bãi xe -->
+            <div class="space-y-3">
+              <div class="rounded-2xl bg-[#F4F8FD]/90 border border-sky-200/80 px-4 py-3.5">
+                <div class="flex items-baseline justify-between gap-2">
+                  <h3 class="font-bold text-bk-deep text-sm sm:text-base">
+                    1. Bãi xe cổng Lý Thường Kiệt
+                  </h3>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=10.772843,106.658174"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="shrink-0 text-xs font-bold text-bk-sky hover:text-bk-deep transition"
+                  >
+                    Xem map →
+                  </a>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-snug">
+                  Phù hợp gửi xe máy · Khu vực cổng chính 268 Lý Thường Kiệt
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-[#F4F8FD]/90 border border-sky-200/80 px-4 py-3.5">
+                <div class="flex items-baseline justify-between gap-2">
+                  <h3 class="font-bold text-bk-deep text-sm sm:text-base">
+                    2. Cổng 3 Tô Hiến Thành
+                  </h3>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=10.774063,106.660938"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="shrink-0 text-xs font-bold text-bk-sky hover:text-bk-deep transition"
+                  >
+                    Xem map →
+                  </a>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-snug">
+                  Gửi được cả xe máy và ô tô · Thuận tiện di chuyển vào khu A
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-[#F4F8FD]/90 border border-sky-200/80 px-4 py-3.5">
+                <div class="flex items-baseline justify-between gap-2">
+                  <h3 class="font-bold text-bk-deep text-sm sm:text-base">
+                    3. Bãi xe Bệnh viện Trưng Vương
+                  </h3>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=10.771118,106.659883"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="shrink-0 text-xs font-bold text-bk-sky hover:text-bk-deep transition"
+                  >
+                    Xem map →
+                  </a>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-snug">
+                  266 Lý Thường Kiệt · Ngay sát bên cạnh khuôn viên trường
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer tham quan 360° -->
+          <div class="pt-3 border-t border-slate-200/80 flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <p class="text-xs sm:text-sm font-bold text-bk-deep truncate">
+                Khám phá trước khuôn viên Bách Khoa
+              </p>
+              <p class="text-xs text-slate-500 truncate">
+                Khám phá không gian 360° HCMUT
+              </p>
+            </div>
+            <a
+              href="https://hcmut.edu.vn/virtual-tour/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shrink-0 px-3.5 py-2 rounded-xl bg-white hover:bg-sky-50 text-bk-sky border border-sky-200 text-xs font-bold transition"
+            >
+              Tour 360° ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PHẦN 4: LIÊN HỆ, XÁC NHẬN & LỜI CHÚC -->
+    <section class="bg-white/90 sm:bg-white/84 sm:backdrop-blur-md rounded-[2rem] border border-white/80 shadow-editorial p-6 sm:p-10 text-center space-y-6 fade-up-item">
+      <div class="space-y-2 max-w-lg mx-auto">
+        <span class="text-xs font-bold tracking-[0.2em] text-bk-sky uppercase">Kết Nối Cùng Minh</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bk-deep">
+          Hẹn Gặp Bạn Tại Hội Trường A5!
+        </h2>
+        <p class="text-slate-700 text-sm sm:text-base">
+          Khi đến trường bạn hãy gọi điện hoặc nhắn Zalo để Minh chạy ra đón và chụp hình cùng nhau nhé!
+        </p>
+      </div>
+
+      <!-- THAY SĐT THẬT CỦA MINH VÀO ĐÂY -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
+        <a
+          href="tel:0901636357"
+          class="w-full sm:flex-1 py-3.5 px-5 rounded-2xl bg-bk-deep hover:bg-bk-royal text-white font-bold text-sm shadow-md shadow-blue-900/15 transition flex items-center justify-center gap-2"
+        >
+          <span>📞</span>
+          <span>Gọi 0901 636 357</span>
+        </a>
+
+        <a
+          href="https://zalo.me/84337001955"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:flex-1 py-3.5 px-5 rounded-2xl bg-bk-sky hover:brightness-105 text-white font-bold text-sm shadow-md shadow-sky-500/20 transition flex items-center justify-center gap-2"
+        >
+          <span class="px-1.5 py-0.5 rounded bg-white text-bk-sky font-extrabold text-xs">Zalo</span>
+          <span>Nhắn tin Zalo</span>
+        </a>
+      </div>
+
+      <div class="max-w-md mx-auto space-y-2">
+        <p class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Báo trước lịch tham dự cho Minh</p>
+        <div class="grid grid-cols-3 gap-2">
+          <button type="button" onclick="selectRsvp('Sẽ đến chung vui!')" class="py-2 px-2 rounded-xl border border-sky-200 bg-white/90 hover:bg-bk-deep hover:text-white text-bk-deep text-xs font-semibold transition">
+            ✅ Sẽ đến
+          </button>
+          <button type="button" onclick="selectRsvp('Đang sắp xếp lịch')" class="py-2 px-2 rounded-xl border border-sky-200 bg-white/90 hover:bg-bk-royal hover:text-white text-bk-deep text-xs font-semibold transition">
+            ⏳ Sắp xếp
+          </button>
+          <button type="button" onclick="selectRsvp('Gửi lời chúc từ xa')" class="py-2 px-2 rounded-xl border border-sky-200 bg-white/90 hover:bg-bk-sky hover:text-white text-bk-deep text-xs font-semibold transition">
+            💐 Chúc từ xa
+          </button>
+        </div>
+        <p id="rsvpStatus" class="text-xs font-medium text-bk-royal min-h-[1rem]"></p>
+      </div>
+
+      <div class="gold-divider max-w-md mx-auto"></div>
+
+      <div class="max-w-md mx-auto space-y-3 text-left">
+        <div class="grid grid-cols-1 gap-2.5">
+          <input
+            id="guestName"
+            type="text"
+            placeholder="Tên của bạn (VD: Lan Anh, Khoa K22...)"
+            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-bk-sky text-sm bg-white/90"
+          />
+          <textarea
+            id="guestWish"
+            rows="2"
+            placeholder="Viết vài lời chúc gửi tới Tân Cử nhân Trần Nhật Minh..."
+            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-bk-sky text-sm bg-white/90"
+          ></textarea>
+        </div>
+        <div class="text-center space-y-2">
+          <button
+            type="button"
+            onclick="sendWarmWish()"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-bk-light hover:bg-sky-100 text-bk-deep border border-sky-200 font-semibold text-xs sm:text-sm transition active:scale-95"
+          >
+            <span>💐</span>
+            <span>Gửi lời chúc &amp; tung hoa</span>
+          </button>
+          <p id="wishFeedback" class="text-xs sm:text-sm font-medium text-bk-royal opacity-0 transition-opacity duration-300">
+            💙 Cảm ơn tình cảm của bạn thật nhiều! Hẹn gặp bạn lúc 9:00 ngày 28/11/2026 tại Bách Khoa nhé!
+          </p>
+          <div id="wishList" class="space-y-2 pt-1 text-left"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center space-y-2 pt-2 bg-white/85 rounded-2xl py-4 px-4 border border-white/70">
+      <div class="inline-flex items-center justify-center gap-2 text-bk-deep font-semibold text-xs tracking-wider uppercase">
+        <span class="w-2 h-2 rounded-full bg-bk-deep"></span>
+        <span>Trường Đại học Bách Khoa · ĐHQG-HCM</span>
+        <span class="w-2 h-2 rounded-full bg-bk-sky"></span>
+      </div>
+      <p class="text-xs text-slate-600">
+        Thiệp mời Lễ Tốt Nghiệp của Trần Nhật Minh · Khóa 2022 – 2026
+      </p>
+    </footer>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="photoLightbox" onclick="closeLightbox()"
+    class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div onclick="event.stopPropagation()" class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl border border-sky-100">
+      <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-100">
+        <span class="font-serif italic text-base font-bold text-bk-deep">Kỷ Yếu Bách Khoa · 2026</span>
+        <button onclick="closeLightbox()" type="button"
+          class="w-8 h-8 rounded-full bg-slate-100 hover:bg-bk-deep text-slate-600 hover:text-white flex items-center justify-center font-bold transition">
+          ✕
+        </button>
+      </div>
+      <div class="bg-slate-50 flex items-center justify-center p-2">
+        <img id="lightboxImg" src="" alt="Ảnh kỷ yếu tốt nghiệp" class="max-h-[72vh] w-auto rounded-xl object-contain" />
+      </div>
+      <div class="px-5 py-4 text-center bg-white">
+        <p id="lightboxCaption" class="text-sm text-slate-700 font-medium"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bkPalette = ['#030391', '#1488DB', '#FFFFFF', '#C89D3C', '#38BDF8'];
+
+    // 1. Nhạc nền vui tươi rộn ràng (Web Audio API)
+    const CelebrationMusic = (() => {
+      let ctx = null;
+      let isPlaying = false;
+      let timerId = null;
+      let stepIndex = 0;
+
+      const melody = [
+        { freq: 523.25, dur: 0.22 },
+        { freq: 659.25, dur: 0.22 },
+        { freq: 783.99, dur: 0.22 },
+        { freq: 1046.50, dur: 0.40 },
+        { freq: 783.99, dur: 0.22 },
+        { freq: 880.00, dur: 0.22 },
+        { freq: 783.99, dur: 0.36 },
+        { freq: 659.25, dur: 0.22 },
+        { freq: 587.33, dur: 0.22 },
+        { freq: 659.25, dur: 0.22 },
+        { freq: 783.99, dur: 0.38 },
+        { freq: 659.25, dur: 0.22 },
+        { freq: 523.25, dur: 0.45 }
+      ];
+
+      function playNote(freq, duration) {
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.065, now + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + duration + 0.02);
+      }
+
+      function scheduleNext() {
+        if (!isPlaying) return;
+        const note = melody[stepIndex % melody.length];
+        playNote(note.freq, note.dur);
+        stepIndex++;
+        timerId = setTimeout(scheduleNext, note.dur * 1000 + 55);
+      }
+
+      function updateButtonUI() {
+        const btn = document.getElementById('musicToggleBtn');
+        const icon = document.getElementById('musicIcon');
+        const label = document.getElementById('musicLabel');
+        if (!btn || !icon || !label) return;
+        btn.setAttribute('aria-pressed', String(isPlaying));
+        icon.textContent = isPlaying ? '🔊' : '🎵';
+        label.textContent = isPlaying ? 'Tắt nhạc' : 'Bật nhạc';
+      }
+
+      function start() {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        if (!ctx) ctx = new AudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+        if (!isPlaying) {
+          isPlaying = true;
+          updateButtonUI();
+          scheduleNext();
+        }
+      }
+
+      function stop() {
+        isPlaying = false;
+        if (timerId) {
+          clearTimeout(timerId);
+          timerId = null;
+        }
+        updateButtonUI();
+      }
+
+      function toggle() {
+        if (isPlaying) stop();
+        else start();
+      }
+
+      return { start, stop, toggle, isPlaying: () => isPlaying };
+    })();
+
+    function toggleMusic() {
+      CelebrationMusic.toggle();
+    }
+
+    // 2. Hiệu ứng pháo giấy lớn
+    function launchGraduationConfetti() {
+      if (typeof confetti !== 'function') return;
+
+      confetti({ particleCount: 65, angle: 60, spread: 65, origin: { x: 0.1, y: 0.65 }, colors: bkPalette });
+      confetti({ particleCount: 65, angle: 120, spread: 65, origin: { x: 0.9, y: 0.65 }, colors: bkPalette });
+    }
+
+    // Hiệu ứng pháo hoa giấy mini theo tọa độ con trỏ chuột
+    function spawnCursorConfetti(clientX, clientY, isClickBurst = false) {
+      if (typeof confetti !== 'function') return;
+      const x = Math.min(Math.max(clientX / window.innerWidth, 0), 1);
+      const y = Math.min(Math.max(clientY / window.innerHeight, 0), 1);
+
+      confetti({
+        particleCount: isClickBurst ? 16 : 4,
+        angle: isClickBurst ? 90 : 75 + (Math.random() * 30),
+        spread: isClickBurst ? 75 : 42,
+        startVelocity: isClickBurst ? 22 : 12,
+        scalar: isClickBurst ? 0.85 : 0.62,
+        ticks: isClickBurst ? 85 : 55,
+        gravity: 0.85,
+        origin: { x, y },
+        colors: bkPalette,
+        disableForReducedMotion: true
+      });
+    }
+
+    // 3. Đếm ngược tới 09:00 Thứ Bảy 28/11/2026
+    const targetDate = new Date('2026-11-28T09:00:00+07:00').getTime();
+
+    function updateCountdown() {
+      const distance = targetDate - Date.now();
+      if (distance <= 0) {
+        document.getElementById('countdownGrid').classList.add('hidden');
+        document.getElementById('countdownDone').classList.remove('hidden');
+        return;
+      }
+
+      document.getElementById('cd-days').textContent = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+    }
+
+    // 4. Xuất file lịch .ics
+    function downloadCalendarEvent() {
+      const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Tran Nhat Minh//HCMUT Graduation 2026//VI',
+        'BEGIN:VEVENT',
+        'DTSTART:20261128T020000Z',
+        'DTEND:20261128T070000Z',
+        'SUMMARY:Lễ Tốt Nghiệp - Trần Nhật Minh (ĐH Bách Khoa TP.HCM)',
+        'DESCRIPTION:Tham dự lễ tốt nghiệp của Tân Cử nhân Trần Nhật Minh tại Hội trường A5 - Trường Đại học Bách Khoa TP.HCM.',
+        'LOCATION:Hội trường A5, 268 Lý Thường Kiệt, Quận 10, TP.HCM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Le-Tot-Nghiep-Tran-Nhat-Minh-HCMUT.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function selectRsvp(statusText) {
+      localStorage.setItem('hcmut_grad_rsvp', statusText);
+      document.getElementById('rsvpStatus').textContent = 'Đã ghi nhận trạng thái của bạn: ' + statusText;
+    }
+
+    function renderWishes() {
+      const wishes = JSON.parse(localStorage.getItem('hcmut_grad_wishes') || '[]');
+      const container = document.getElementById('wishList');
+      container.innerHTML = wishes.slice(-5).reverse().map((item) => {
+        const safeName = item.name.replace(/</g, '&lt;');
+        const safeMsg = item.msg.replace(/</g, '&lt;');
+        return `<div class="p-3 rounded-xl bg-bk-light/80 border border-sky-100 text-xs text-slate-700"><span class="font-bold text-bk-deep">${safeName}:</span> ${safeMsg}</div>`;
+      }).join('');
+    }
+
+    function sendWarmWish() {
+      launchGraduationConfetti();
+      const nameInput = document.getElementById('guestName');
+      const wishInput = document.getElementById('guestWish');
+      const name = nameInput.value.trim() || 'Người bạn Bách Khoa';
+      const msg = wishInput.value.trim();
+
+      if (msg) {
+        const wishes = JSON.parse(localStorage.getItem('hcmut_grad_wishes') || '[]');
+        wishes.push({ name, msg });
+        localStorage.setItem('hcmut_grad_wishes', JSON.stringify(wishes));
+        wishInput.value = '';
+        renderWishes();
+      }
+
+      const feedback = document.getElementById('wishFeedback');
+      feedback.classList.remove('opacity-0');
+    }
+
+    // 5. Lightbox
+    function openLightbox(src, caption) {
+      const box = document.getElementById('photoLightbox');
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').textContent = caption;
+      box.classList.remove('hidden');
+      box.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const box = document.getElementById('photoLightbox');
+      box.classList.add('hidden');
+      box.classList.remove('flex');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // 6. Con trỏ chuột + pháo hoa giấy (chỉ chạy mượt cho chuột thật trên desktop)
+    (function initCustomCursor() {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      const ring = document.getElementById('cursorRing');
+      const dot = document.getElementById('cursorDot');
+      if (!ring || !dot) return;
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let lastConfettiTime = 0;
+
+      document.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const now = Date.now();
+        if (now - lastConfettiTime > 120) {
+          lastConfettiTime = now;
+          spawnCursorConfetti(mouseX, mouseY, false);
+        }
+
+        const interactive = e.target.closest('a, button, .editorial-frame, .group');
+        ring.classList.toggle('is-hover', Boolean(interactive));
+      });
+
+      document.addEventListener('pointerdown', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        ring.classList.add('is-click');
+        spawnCursorConfetti(e.clientX, e.clientY, true);
+      });
+
+      document.addEventListener('pointerup', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        ring.classList.remove('is-click');
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+    })();
+
+    // 7. Hiệu ứng xuất hiện khi cuộn
+    if (window.innerWidth >= 768 && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up-item').forEach((el) => observer.observe(el));
+    } else {
+      document.querySelectorAll('.fade-up-item').forEach((el) => el.classList.add('visible'));
+    }
+
+    window.onload = function () {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+      const savedRsvp = localStorage.getItem('hcmut_grad_rsvp');
+      if (savedRsvp) {
+        document.getElementById('rsvpStatus').textContent = 'Trạng thái đã chọn: ' + savedRsvp;
+      }
+      renderWishes();
+      setTimeout(launchGraduationConfetti, 500);
+    };
+  </script>
+</body>
+</html>
